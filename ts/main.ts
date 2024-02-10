@@ -26,3 +26,57 @@
  * con el tipado estático propio de este superset, como veremos en los siguiente casos de uso.*/
 /**---------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /**---------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/**Implementación de la herencia de interfaces:
+ * EN cierto modo, las interfaces también usan la característica de herencia y por eso se puede incluir su uso en esta unidad, pero su principal propósito, más que la reu_
+ * tilización de código, es establecer un contrato para las clases en las que se implemente, que obligue a estas a que declaren sus propiedades. La sintaxis que emplean las
+ * clases que usan una interfaz es la palabra "implement" justo después del identificador de clase y, a continuación, el identificador de la interfaz.
+ * 
+ * class IdentificadorClase implements IdentificadorInterfaz {
+ *      código de la clase;
+ * }
+ * 
+ *Ejemplo: */
+
+interface Order {
+    id:string,
+    date:Date,
+    positions:Array<any>,
+    userId:string,
+}
+
+class ComputerOrder implements Order{
+    id:string;
+    date:Date;
+    positions:Array<any>;
+    userId: string; //Comentar para ver el error Lín.58.
+    //Esta clase continúa despues del párrafo siguiente.
+
+/**A continuación, vamos a realizar la transpilación escribiendo en la terminal de VSC el correspondiente comando:
+ * 
+ * tsc ts/main.ts --outFile js/main.js --taret ES2015 --watch
+ * 
+ * Al realizar el proceso, comprobaremos en la terminal que existe un error, puesto que en la clase "CompuerOrder" que implementa la interfaz "Order" no hemos declarado
+ * la propiedad "userId", es decir, es obligatorio que contenga todas las propiedades y métodos, aunque la cabecera de estos últimos no se suele declarar en las interfaces
+ * de TypeScript.
+ * 
+ * Una vez que se añada esa propiedad, desaparecerá el error; pero se podrán añadir además otras propiedades y, por supuesto, otros métodos. (Para ver el error comentar lín.51) */
+
+    //Aquí continúa la clase.
+    constructor(id:string, date:Date, userId:string){
+        this.id = id;
+        this.date = date;
+        this.userId = userId;
+    }
+    addPosition(position:any):void{
+        this.positions.push(position);
+    }
+    getPositions():Array<any>{
+        return this.positions;
+    }
+}
+
+/**Ahora observaremos que la clase queda definida e implementa correctamente el contrato de la interfaz, es decir, declara una serie de propiedades que serán obligatorias
+ * para modelar y estructurar los datos que manejará nuestra aplicación. */
+/**---------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/**---------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
