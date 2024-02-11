@@ -79,4 +79,135 @@ class ComputerOrder implements Order{
  * para modelar y estructurar los datos que manejará nuestra aplicación. */
 /**---------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /**---------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/**Implementación de la herencia de clases:
+ * La herencia de clases, como detallamos en el primer apartado, permite jerarquizar las diferentes clases de una aplicación y reutilizar el código declarado en las super_
+ * clases. En el caso de TypeScript, su sintaxis se lleva a cabo añadiendo en la declaración de la subclase la palabra reservada "extends" seguida del identificador de la
+ * superclase de la que hereda.
+ * 
+ * class IdentificadorClase extends IdentificadorSuperclase{
+ *      constructor(){
+ *          super()
+ *      }
+ * }
+ * 
+ * Además, en el constructor de la clase se empleará el método "super()" para referir al mismo método de la clase padre.
+ * Ejemplo: */
 
+class Employee{
+    protected name:string;
+    protected surname:string;
+    protected dni:string;
+    protected birthDay:Date;
+
+    constructor(name:string, surname:string, dni:string, birthDate:Date){
+        this.name = name;
+        this.surname = surname;
+        this.dni = dni;
+        this.birthDay = birthDate;
+    }
+    getName(){
+        return this.name;
+    }
+    setName(name:string){
+        this.name = name;
+    }
+    getSurname(){
+        return this.surname;
+    }
+    setSurname(surname:string){
+        this.surname = surname;
+    }
+    getDni(){
+        return this.dni;
+    }
+    setDni(dni:string){
+        this.dni = dni;
+    }
+    getBirthDay(){
+        return this.birthDay;
+    }
+    setBirthDay(birthday:Date){
+        this.birthDay = birthday;
+    }
+}
+
+class Manager extends Employee{
+    role:string;
+    
+    constructor(name:string,
+                surname:string,
+                dni:string,
+                birthDay:Date,
+                role:string,){
+                super(name,surname,dni,birthDay);
+                this.role = role;
+                }
+}
+
+/**Aquí podemos comprobar que disponemos de una clase padre o superclase "Employee" que dispone de una serie de propiedades y métodos para trabajar con los datos de los
+ * objetos que se instancien de ella. Además, podemos implementar para las propiedades la modificación de acceso "protected", que permitirá hacer accesible la propiedad
+ * en su clase y en las clases que hereden de esta.
+ * 
+ * Y, a continuación, tenemos una clase "Manager" que hereda de "Employee", con lo cual podemos usar en su constructor el método "super()" para pasarle como argumentos
+ * los recibidos en la instancia de objetos de esta clase "Manager" y que se invoque el constructor en la instancia de objetos de esta clase "Manager" y que se incoque el
+ * constructor de la clase padre, de manera que no es necesario repetir todo el código de la clase padre.
+ * 
+ * Para comprobar su funcionamiento, vamos a añadir una instancia de la clase hija "Manager" añadiendo el siguiente código. */
+
+let manager = new Manager('David', 'Rodríguez', '74896654E', new Date('1984-10-29'), 'ventas' );
+console.log(manager.getName());
+console.log(manager.getBirthDay());
+console.log(manager.role);
+
+/**Al grabar y ejecutar este archivo main.ts, obtendremos los mensajes en la consola del navegador, confirmando su correcto funcionamiento.
+ * 
+ * Además, la clase padre también puede usarse para instanciar objetos; por ejemplo, podemos añadir el siguiente código y no tendrá ningún tipo de error: */
+
+let empleadoIn = new Employee('sara', 'Pérez', '54632215D', new Date('1990,10,05'));
+
+/**Otra manera de implementar herencia es mediante clases abstractas, y en este caso servirán, como en el caso de las interfaces, para obligar a las clases que hereden de
+ * ellas a que implementen una serie de miembros.
+ * 
+ * Para estudiar este tipo de herencia, vamos a escribir el siguiente código, en el que escribimos una clase abstracta que ya usamos anteriormente; */
+
+abstract class Price {
+    abstract setPrice(regularPrice:number, savingPercent:number):void;
+}
+class ArticlePrice extends Price{
+    private regularPrice:number;
+    private savingPercent:number;
+    private currency:string;
+
+    constructor (regularPrice:number,
+                 savingPercent:number,
+                 currency:string){
+                 super();
+                 this.regularPrice = regularPrice;
+                 this.savingPercent = savingPercent;
+                 this.currency = currency;
+                 }
+    setPrice(regularPrice:number, savingPercent:number):void{
+        this.regularPrice = regularPrice;
+        this.savingPercent = savingPercent;
+    }
+    getPrice():string{
+        return this.regularPrice - this.savingPercent / 100 * this.regularPrice + ' ' + this.currency;
+    }
+}
+
+/**En este tipo de herencia con una superclase abstracta, estamos implementando el método "setPrice()" de manera obligatoria en las clases que heredan de "Price"; si no
+ * estuviera declarado y definido, el transpilador lanzaría un error. Respecto a la clase hija "ArticlePrice", aunque en este caso no esté usando las propiedades de clase
+ * padre, es obligatorio introducir el método "super()" dejándolo vacío.
+ * 
+ * Una vez declaradas las clases, podemos instanciar objetos solamente de la clase hija, puesto que, recordemos, las clases abstractas se usan como interfaces y no es posi_
+ * ble hacerlo de otro modo. Añadimos el siguiente código para comprobarlo: */
+
+let articleInPrice = new ArticlePrice(150, 0 , '€');
+console.log(articleInPrice.getPrice());
+
+articleInPrice.setPrice(200,25);
+console.log(articleInPrice.getPrice);
+
+/**Al grabar y transpilar el archivo, podremos comprobar en el navegador que funciona correctamente. */
+/**---------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/**---------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
