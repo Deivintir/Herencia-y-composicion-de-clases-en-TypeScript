@@ -211,3 +211,41 @@ console.log(articleInPrice.getPrice);
 /**Al grabar y transpilar el archivo, podremos comprobar en el navegador que funciona correctamente. */
 /**---------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /**---------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/**Composición de clases:
+ * Una alternativa a la herencia es la composición, otro mecanismo también utilizado en muchos lenguajes de programación que implementan orientaciòn a objetos. Más que un
+ * mecanismo sintáctico, se trata de una forma de utilizar las clases para instanciar objetos mediante el uso de varias clsaes a la vez, de ahí que se denomine composición
+ * 
+ * Vamos a ver un ejemplo práctico: */
+
+class User{
+    private name:string;
+    private surname:string;
+    private adress:object;
+
+    constructor(name, surname){
+        this.name = name;
+        this.surname = surname;
+    }
+    setAdress(adress:Adress){
+        this.adress = adress;
+    }
+}
+
+class Adress{
+    street:string;
+    city:string;
+
+    constructor (street, city){
+        this.street = street;
+        this.city = city;
+    }
+}
+
+let userIn = new User('Lucía', 'Nadal');
+let adreesIn = new Adress('Goya', 'Granada');
+
+userIn.setAdress(adreesIn);
+console.log(userIn);
+
+/**Al grabar y transpilar el archivo, comprobaremos que funciona correctamente en la impresión en la consola del navegador de esta otra característica de la programación
+ * orientada a objetos. */
