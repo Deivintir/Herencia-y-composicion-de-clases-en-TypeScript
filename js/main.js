@@ -162,7 +162,7 @@ class ArticlePrice extends Price {
 let articleInPrice = new ArticlePrice(150, 0, '€');
 console.log(articleInPrice.getPrice());
 articleInPrice.setPrice(200, 25);
-console.log(articleInPrice.getPrice);
+console.log(articleInPrice.getPrice());
 /**Al grabar y transpilar el archivo, podremos comprobar en el navegador que funciona correctamente. */
 /**---------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /**---------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
